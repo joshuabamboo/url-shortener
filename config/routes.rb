@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get '*path', to: 'urls#redirect'
   root 'urls#new'
   resources :urls, only: [:create, :show, :index]
   # The priority is based upon order of creation: first created -> highest priority.

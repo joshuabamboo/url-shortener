@@ -2,7 +2,7 @@ class Url < ActiveRecord::Base
   validates :long_form, :presence => true
 
   def generate_unique_id
-    @id = SecureRandom.urlsafe_base64(6)
+    id = SecureRandom.urlsafe_base64(6)
     is_duplicate?(id) ? generate_unique_id : id
   end
 
@@ -10,7 +10,12 @@ class Url < ActiveRecord::Base
     Url.all.any? { |url| url.short_form == id}
   end
 
-  def short_url(base_url, id)
-    "base_url/id"
+  def get_id_from_short_url
+    request.params[:path]
+  end
+
+  def get_original_url
+    url = Url.find_by short_form: request.params[:path]
+    url.long_form
   end
 end

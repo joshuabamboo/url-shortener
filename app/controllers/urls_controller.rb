@@ -11,13 +11,18 @@ class UrlsController < ApplicationController
 
   def create
     new_url = Url.new(url_params)
-    new_url.short_form=Url.new.generate_unique_id
+    new_url.short_form = Url.new.generate_unique_id
     new_url.save
     redirect_to root_path
   end
 
   def show
     @new_url = Url.find(params[:id])
+  end
+
+  def redirect
+    url = Url.find_by short_form: request.params[:path]
+    redirect_to url.long_form, status: 302
   end
 
 
