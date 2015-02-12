@@ -42,3 +42,7 @@ group :development, :test do
 end
 
 gem 'pry'
+gem "therubyracer"
+gem "less-rails" 
+gem "twitter-bootstrap-rails"
+gem 'bootstrap_form'

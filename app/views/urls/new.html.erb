@@ -1,10 +1,27 @@
-<%= form_for @new_url do |f| %>
-  <%= f.text_field :long_form %>
-  <%= f.submit %>
-<% end %>
+<div class="jumbotron">
+  <center>
+    <div class="form">
+      <%= bootstrap_form_for @new_url, layout: :inline do |f| %>
+        <%= f.text_field :long_form, class: "enlarge-form", size: "55", hide_label: :true, placeholder: "Paste your URL here" %>
+        <%= f.submit "Shorten URL", class: "btn btn-success enlarge-btn"%>
+      <% end %>
+    </div> 
+  </center>
+</div> 
+<div>
+  <table class="table table-striped table-bordered">
+    <tr>
+      <th>Original Url</th>
+      <th>Short Url</th> 
+      <th>Visit Count</th>
+    </tr>
 
-<% @all_urls.each do |url| %>
-  <ul>
-    <li><%= url.long_form %>: <%=link_to "#{@base_url}#{url.short_form}", "#{@base_url}#{url.short_form}"%></li>
-  </ul>
-<% end %>
+    <% @all_urls.each do |url| %>
+      <tr>
+        <td><%= url.long_form %></td>
+        <td><%=link_to "#{@base_url}#{url.short_form}", "#{@base_url}#{url.short_form}"%></td>
+        <td>0</td>
+      </tr>
+    <% end %>
+  </table>
+</div>
