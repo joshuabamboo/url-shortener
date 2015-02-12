@@ -8,6 +8,7 @@ class UrlsController < ApplicationController
     @all_urls = Url.all
     @base_url = "localhost:3000/"
     @top100 = Url.order('access_count DESC').limit(100)
+    @last5 = Url.order('updated_at DESC').limit(5)
   end
 
   def create

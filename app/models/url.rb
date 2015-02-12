@@ -2,7 +2,7 @@ class Url < ActiveRecord::Base
   validates :long_form, :presence => true
 
   def generate_unique_id
-    id = SecureRandom.urlsafe_base64(6)
+    id = SecureRandom.urlsafe_base64(4)
     is_duplicate?(id) ? generate_unique_id : id
   end
 
