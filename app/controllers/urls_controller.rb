@@ -9,9 +9,10 @@ class UrlsController < ApplicationController
   end
 
   def create
-    @new_url = Url.new(url_params)
-    @new_url.save
-    flash[:notice] = "Post successfully created"
+    new_url = Url.new(url_params)
+    new_url.short_form=Url.new.generate_unique_id
+    new_url.save
+    # flash[:notice] = "Post successfully created"
     redirect_to root_path
   end
 
