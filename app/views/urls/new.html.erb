@@ -1,11 +1,10 @@
 <%= form_for @new_url do |f| %>
-  <%= f.label :long_form %>:
   <%= f.text_field :long_form %>
   <%= f.submit %>
 <% end %>
 
 <% @all_urls.each do |url| %>
   <ul>
-    <li><%= url.long_form %></li>
+    <li><%= url.long_form %>: <%=link_to "#{@base_url}#{url.short_form}", "#{@base_url}#{url.short_form}"%></li>
   </ul>
 <% end %>
