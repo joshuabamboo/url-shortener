@@ -7,6 +7,7 @@ class UrlsController < ApplicationController
     @new_url = Url.new
     @all_urls = Url.all
     @base_url = "localhost:3000/"
+    @top100 = Url.order('access_count DESC').limit(100)
   end
 
   def create
@@ -22,6 +23,8 @@ class UrlsController < ApplicationController
 
   def redirect
     url = Url.find_by short_form: request.params[:path]
+    url.access_count += 1
+    url.save
     redirect_to url.long_form, status: 302
   end
 

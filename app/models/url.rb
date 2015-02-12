@@ -18,4 +18,8 @@ class Url < ActiveRecord::Base
     url = Url.find_by short_form: request.params[:path]
     url.long_form
   end
+
+  def visit_count
+    
+  end
 end
