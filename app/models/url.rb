@@ -3,23 +3,26 @@ class Url < ActiveRecord::Base
 
   def generate_unique_id
     id = SecureRandom.urlsafe_base64(4)
-    is_duplicate?(id) ? generate_unique_id : id
+    Url.is_duplicate?(id) ? generate_unique_id : id
   end
 
-  def is_duplicate?(id)
-    Url.all.any? { |url| url.short_form == id}
+  def self.is_duplicate?(id)
+    self.all.any? { |url| url.short_form == id}
   end
 
-  def get_id_from_short_url
-    request.params[:path]
+  def self.get_last_urls(num_of_urls)
+    self.order('updated_at DESC').limit(num_of_urls)
   end
 
-  def get_original_url
-    url = Url.find_by short_form: request.params[:path]
-    url.long_form
+  def self.get_top_urls(num_of_urls)
+    self.order('access_count DESC').limit(num_of_urls)
   end
 
-  def visit_count
-    
+  def self.get_long_url(short_url_id)
+    self.find_by short_url_id
+  end
+
+  def visit_incrementor(count_column)
+    count_column += 1
   end
 end

@@ -1,14 +1,9 @@
 class UrlsController < ApplicationController
-  def index
-    
-  end
-
   def new
     @new_url = Url.new
-    @all_urls = Url.all
-    @base_url = "ur-.herokuapp.com/"
-    @top100 = Url.order('access_count DESC').limit(100)
-    @last5 = Url.order('updated_at DESC').limit(5)
+    @base_url = request.original_url
+    @top100 = Url.get_top_urls(100)
+    @last5 = Url.get_last_urls(5)
   end
 
   def create
@@ -18,15 +13,11 @@ class UrlsController < ApplicationController
     redirect_to root_path
   end
 
-  def show
-    @new_url = Url.find(params[:id])
-  end
-
   def redirect
-    url = Url.find_by short_form: request.params[:path]
-    url.access_count += 1
-    url.save
-    redirect_to url.long_form, status: 302
+    original_url = Url.get_long_url(short_form: request.params[:path])
+    original_url.access_count += 1
+    original_url.save
+    redirect_to original_url.long_form, status: 302
   end
 
 
