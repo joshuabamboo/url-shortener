@@ -11,7 +11,7 @@ class Url < ActiveRecord::Base
   end
 
   def self.get_last_urls(num_of_urls)
-    self.order('updated_at DESC').limit(num_of_urls)
+    self.order('created_at DESC').limit(num_of_urls)
   end
 
   def self.get_top_urls(num_of_urls)
@@ -20,9 +20,5 @@ class Url < ActiveRecord::Base
 
   def self.get_long_url(short_url_id)
     self.find_by short_url_id
-  end
-
-  def visit_incrementor(count_column)
-    count_column += 1
   end
 end

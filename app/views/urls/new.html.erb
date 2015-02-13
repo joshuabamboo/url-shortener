@@ -7,42 +7,42 @@
       <% end %>
     </div> 
   </center>
-</div> 
-<div>
-  <h1>Most Recent</h1>
-  <table class="table table-striped table-bordered">
-    <tr>
-      <th>Original Url</th>
-      <th>Short Url</th> 
-      <th>Visit Count</th>
-    </tr>
-
-    <% @last5.each do |url| %>
-      <tr>
-        <td><%= url.long_form %></td>
-        <td><%=link_to "#{@base_url}#{url.short_form}", "#{@base_url}#{url.short_form}", :target => "_blank"%></td>
-        <td><%= url.access_count %></td>
-      </tr>
-    <% end %>
-  </table>
 </div>
-<br>
 
-<div>
-  <h1>Top 100</h1>
-  <table class="table table-striped table-bordered">
-    <tr>
-      <th>Original Url</th>
-      <th>Short Url</th> 
-      <th>Visit Count</th>
-    </tr>
-
-    <% @top100.each do |url| %>
+<div class="tables">
+  <div>
+    <h1>Most Recent</h1>
+    <table class="table table-striped table-bordered">
       <tr>
-        <td><%= url.long_form %></td>
-        <td><%=link_to "#{@base_url}#{url.short_form}", "#{@base_url}#{url.short_form}", :target => "_blank"%></td>
-        <td><%= url.access_count %></td>
+        <th>Original Url</th>
+        <th>Short Url</th> 
+        <th>Visit Count</th>
       </tr>
-    <% end %>
-  </table>
+      <% @last5.each do |url| %>
+        <tr>
+          <td><%= url.long_form %></td>
+          <td><%=link_to "#{@base_url}#{url.short_form}", "#{@base_url}#{url.short_form}", :target => "_blank"%></td>
+          <td><%= url.access_count %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div><br>
+
+  <div>
+    <h1>Top 100</h1>
+    <table class="table table-striped table-bordered">
+      <tr>
+        <th>Original Url</th>
+        <th>Short Url</th> 
+        <th>Visit Count</th>
+      </tr>
+      <% @top100.each do |url| %>
+        <tr>
+          <td><%= url.long_form %></td>
+          <td><%=link_to "#{@base_url}#{url.short_form}", "#{@base_url}#{url.short_form}", :target => "_blank"%></td>
+          <td><%= url.access_count %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
 </div>
