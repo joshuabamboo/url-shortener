@@ -15,9 +15,13 @@ class UrlsController < ApplicationController
 
   def redirect
     original_url = Url.get_long_url(short_form: request.params[:path])
-    original_url.access_count += 1
-    original_url.save
-    redirect_to original_url.long_form, status: 302
+    if original_url
+      original_url.access_count += 1
+      original_url.save
+      redirect_to original_url.long_form, status: 302
+    else
+      redirect_to root_path
+    end
   end
 
 
