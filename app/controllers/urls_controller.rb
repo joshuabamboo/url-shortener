@@ -18,7 +18,12 @@ class UrlsController < ApplicationController
     if original_url
       original_url.access_count += 1
       original_url.save
-      redirect_to original_url.long_form, status: 302
+      if original_url.long_form.include?("http")
+        redirect_to original_url.long_form, status: 302
+      else
+        full_url = "http://"+original_url.long_form
+        redirect_to full_url, status: 302
+      end
     else
       redirect_to root_path
     end
