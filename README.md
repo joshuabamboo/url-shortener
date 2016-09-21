@@ -18,6 +18,6 @@ Postgres DB
 - I initially thought about simply creating an array [1..999999], shuffling it, and using the `pop` method to assign the last integer as the URL path. Ultimately I decided against this because it doesn't scale well (it can only handle 1 million URLs). I decided to go with a six character base64 path to solve the scale limitations. Unlike the first solution, a base64 generator has the possibility (however improbable) of not being unique. I solved this by building a method to check the db for all previously stored base64 strings. 
 - To achieve the short url: create table with `long_form` url and `short_form` url, generate random base64 string, check uniqueness of string, store in db as `short_form` url path.
 
-###Future improvements
+###Future Improvements
 - Check to make sure the submitted URL is valid.
 - Add JavaScript so that the visit count updates without having to reload the page.
